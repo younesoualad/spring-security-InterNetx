@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') and  !@UserAccess.canDeleteUser(#id)")
     public ResponseEntity<String> deleteUser(@PathVariable("id") int id) {
         try {
             UserViewDTO userView = userService.delete(id);

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -57,6 +58,7 @@ public class RoleRepo implements roleIRepo{
         });
     }
 
+    @PreAuthorize("!@UserAccess.canUpdateRoles(#user.id)")
     @Override
     public int update(User user) {
         Role role = getRolesAsObject(user.getRoles());
