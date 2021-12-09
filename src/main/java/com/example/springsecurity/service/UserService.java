@@ -37,7 +37,7 @@ public class UserService implements UserDetailsService {
     @Transactional
     public UserViewDTO create(NewUserDTO newUserDTO) {
         User user = userViewMapper.toUser(newUserDTO);
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPassword(passwordEncoder.encode(newUserDTO.getPassword()));
         userRepo.create(user);
 
         return userViewMapper.toUserView(user);
@@ -49,7 +49,7 @@ public class UserService implements UserDetailsService {
 
         if(_user!=null){
             User user = userViewMapper.toUser(newUserDTO);
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(newUserDTO.getPassword()));
 
             userRepo.update(user);
 

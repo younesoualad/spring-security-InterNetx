@@ -69,7 +69,7 @@ public class RoleRepo implements roleIRepo{
                         "role_billing=?,"+
                         "role_registry=?,"+
                         "role_purchase_read=?,"+
-                        "ole_purchase_write=?," +
+                        "role_purchase_write=?," +
                         "role_sale_write=?," +
                         "role_sql=? WHERE user_id=?"
                         ,
