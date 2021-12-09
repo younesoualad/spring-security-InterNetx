@@ -66,6 +66,7 @@ public class UserRepo  implements userIRepo{
     @Override
     public int update(User user) {
         this.roleRepo.update(user);
+
         return jdbcTemplate.update("UPDATE user SET login=?, password=?, fname=?, lname=?, email=? WHERE id=?",
                 new Object[] {user.getLogin(), user.getPassword(), user.getFname(), user.getLname(), user.getEmail(), user.getId()} );
     }

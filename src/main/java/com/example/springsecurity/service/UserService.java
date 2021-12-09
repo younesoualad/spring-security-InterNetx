@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService {
         if(_user!=null){
             User user = userViewMapper.toUser(newUserDTO);
             user.setPassword(passwordEncoder.encode(newUserDTO.getPassword()));
-
+            user.setId(_user.getId());
             userRepo.update(user);
 
             return userViewMapper.toUserView(user);

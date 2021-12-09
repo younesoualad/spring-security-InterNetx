@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,9 +59,7 @@ public class RoleRepo implements roleIRepo{
     @Override
     public int update(User user) {
         Role role = getRolesAsObject(user.getRoles());
-
         role.setUser_id(user.getId());
-
         return jdbcTemplate.update("UPDATE role SET " +
                         " role_admin=?," +
                         " role_develop=?," +
@@ -105,7 +104,6 @@ public class RoleRepo implements roleIRepo{
 
     private Role getRolesAsObject(Set<ERole> roles){
         Role role = new Role();
-
 
         if(roles != null){
             roles.forEach(_role -> {

@@ -35,6 +35,7 @@ public class UserViewMapper {
 
 
         user.setRoles(roles);
+
         return user;
     }
     public UserViewDTO toUserView(User user){
@@ -44,6 +45,7 @@ public class UserViewMapper {
         userView.setRoles(user.getRoles().stream()
                 .map(role -> role.name())
                 .collect(Collectors.toSet()));
+
         return userView;
     }
 
