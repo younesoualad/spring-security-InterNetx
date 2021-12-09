@@ -27,8 +27,6 @@ public class UserService implements UserDetailsService {
     private  UserRepo userRepo;
 
     @Autowired
-    private RoleRepo roleRepo;
-    @Autowired
     private  PasswordEncoder passwordEncoder;
     @Autowired
     private UserViewMapper userViewMapper;

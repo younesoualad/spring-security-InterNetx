@@ -58,8 +58,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                                     ex.getMessage()
                             );
                         }
-                )
-                .and();
+                ).and();
 
         // Enable CORS and disable CSRF
         // Set session management to stateless
@@ -68,7 +67,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers("/api/public/login").permitAll().
                 anyRequest().authenticated().and().
                 exceptionHandling().and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().httpBasic();
 
         // Add JWT token filter
         httpSecurity.addFilterBefore(
