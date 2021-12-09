@@ -28,6 +28,7 @@ public class RoleRepo implements roleIRepo{
 
         role.setUser_id(user.getId());
 
+        // Insert request
         return jdbcTemplate.update("INSERT INTO role (" +
                         "user_id," +
                         " role_admin," +
@@ -101,7 +102,11 @@ public class RoleRepo implements roleIRepo{
     }
 
 
-
+    /**
+     * convert the list of enum to the persistence object
+     * @param roles
+     * @return
+     */
     private Role getRolesAsObject(Set<ERole> roles){
         Role role = new Role();
 

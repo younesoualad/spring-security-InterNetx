@@ -20,6 +20,11 @@ import static com.example.springsecurity.enums.ERole.*;
 @Component
 public class UserViewMapper {
 
+    /**
+     * generate a User object from NewUserDTO
+     * @param newUserDTO
+     * @return
+     */
     public User toUser(NewUserDTO newUserDTO) {
         User user = new User();
         user.setLogin(newUserDTO.getLogin());
@@ -38,6 +43,12 @@ public class UserViewMapper {
 
         return user;
     }
+
+    /**
+     * generate a UserView object from User
+     * @param user
+     * @return
+     */
     public UserViewDTO toUserView(User user){
         UserViewDTO userView = new UserViewDTO();
         userView.setFullName(user.getFullName());
@@ -49,6 +60,11 @@ public class UserViewMapper {
         return userView;
     }
 
+    /**
+     * get list of ERole ( enum ) from String list
+     * @param roles
+     * @return
+     */
     private Set<ERole> getRolesAsERoles(Set<String> roles){
 
         Set<ERole> _roles = new HashSet<>();

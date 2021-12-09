@@ -41,13 +41,6 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        /*auth.userDetailsService(username -> (UserDetails) userRepo
-                .findBylogin(username)
-                .orElseThrow(
-                        () -> new UsernameNotFoundException(
-                                format("User: %s, not found", username)
-                        )
-                ));*/
 
         auth.userDetailsService(userService);
     }

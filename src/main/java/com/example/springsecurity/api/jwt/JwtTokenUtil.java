@@ -13,6 +13,15 @@ import org.springframework.stereotype.Service;
 
 import static java.lang.String.format;
 
+/**
+ * This class has 3 main functions:
+ *
+ * * generate a JWT from login, date, expiration, secret
+ * * get username from JWT
+ * * validate a JWT
+ */
+
+
 @Service
 public class JwtTokenUtil {
     private final String jwtSecret = "zdtlD3JK56m6wTTgsNFhqzjqP";
@@ -22,7 +31,11 @@ public class JwtTokenUtil {
     private Logger logger;
 
 
-
+    /**
+     * generate a JWT from login, date, expiration, secret
+     * @param user
+     * @return
+     */
     public String  generateAccessToken(User user) {
         return Jwts.builder()
                 .setSubject(format("%s,%s", user.getId(), user.getLogin()))
@@ -42,6 +55,11 @@ public class JwtTokenUtil {
         return claims.getSubject().split(",")[0];
     }
 
+    /**
+     * get username from JWT
+     * @param token
+     * @return
+     */
     public String getUsername(String token) {
         Claims claims = Jwts.parser()
                 .setSigningKey(jwtSecret)
@@ -63,6 +81,12 @@ public class JwtTokenUtil {
         return getExpirationDate(token).before(new Date());
     }
 
+    /**
+     * validate a JWT
+     * @param token
+     * @param userDetails
+     * @return
+     */
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
