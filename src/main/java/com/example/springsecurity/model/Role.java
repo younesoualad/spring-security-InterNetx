@@ -134,4 +134,22 @@ public class Role {
                 this.role_sale_write == other.role_sale_write &&
                 this.role_sql == other.role_sql;
     }
+
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", user_id=" + user_id +
+                ", role_admin=" + role_admin +
+                ", role_develop=" + role_develop +
+                ", role_cctld=" + role_cctld +
+                ", role_gtld=" + role_gtld +
+                ", role_billing=" + role_billing +
+                ", role_registry=" + role_registry +
+                ", role_purchase_read=" + role_purchase_read +
+                ", role_purchase_write=" + role_purchase_write +
+                ", role_sale_write=" + role_sale_write +
+                ", role_sql=" + role_sql +
+                '}';
+    }
 }

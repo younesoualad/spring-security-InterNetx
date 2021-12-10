@@ -40,7 +40,6 @@ public class ACLHandler {
     public boolean rolesNotChanged(User user){
         Role oldRole = roleRepo.read(user.getId());
         Role newRole = roleRepo.getRolesAsObject(user.getRoles());
-
         return oldRole.equals(newRole);
     }
 
@@ -48,6 +47,10 @@ public class ACLHandler {
     private boolean isUserPrincipal(int id) {
         User user = authenticatedUserService.getAuthenticatedUser();
         User _user = userRepo.findById(id);
-        return (_user.getLogin().equals(user.getLogin()));
+
+        if(_user !=null && user!=null)
+            return (_user.getLogin().equals(user.getLogin()));
+
+        return false;
     }
 }
