@@ -16,6 +16,9 @@ public class ACLHandler {
     @Autowired
     private AuthenticatedUserService authenticatedUserService;
 
+    public boolean canReadUser(int id) {
+        return isUserPrincipal(id);
+    }
 
     public boolean canUpdateRoles(int id) {
         return isUserPrincipal(id);

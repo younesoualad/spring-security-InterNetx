@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or @UserAccess.canReadUser(#id)")
     public ResponseEntity<UserViewDTO> getUserById(@PathVariable("id") int id) {
         UserViewDTO userView = userService.read(id);
 
@@ -62,7 +62,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    @PreAuthorize("hasRole('ADMIN') and  !@UserAccess.canDeleteUser(#id)")
+    @PreAuthorize("hasRole('ADMIN') and !@UserAccess.canDeleteUser(#id)")
     public ResponseEntity<String> deleteUser(@PathVariable("id") int id) {
         try {
             UserViewDTO userView = userService.delete(id);
