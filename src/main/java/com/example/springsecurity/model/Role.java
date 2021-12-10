@@ -110,4 +110,28 @@ public class Role {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+
+        if (obj.getClass() != this.getClass()) {
+            return false;
+        }
+
+        final Role other = (Role) obj;
+
+        return this.role_admin == other.role_admin &&
+                this.role_billing == other.role_billing &&
+                this.role_cctld == other.role_cctld &&
+                this.role_develop == other.role_develop &&
+                this.role_gtld == other.role_gtld &&
+                this.role_purchase_read == other.role_purchase_read &&
+                this.role_purchase_write == other.role_purchase_write &&
+                this.role_registry == other.role_registry &&
+                this.role_sale_write == other.role_sale_write &&
+                this.role_sql == other.role_sql;
+    }
 }

@@ -11,4 +11,5 @@ public interface roleIRepo {
     int create(User user);
     int update(User user);
     Set<ERole> findById(int id);
+    Role read(int id);
 }

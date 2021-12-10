@@ -58,7 +58,7 @@ public class RoleRepo implements roleIRepo{
         });
     }
 
-    @PreAuthorize("!@UserAccess.canUpdateRoles(#user.id)")
+    @PreAuthorize("!@UserAccess.isOwner(#user.id) or @UserAccess.rolesNotChanged(#user)")
     @Override
     public int update(User user) {
         Role role = getRolesAsObject(user.getRoles());
@@ -103,13 +103,23 @@ public class RoleRepo implements roleIRepo{
         }
     }
 
+    @Override
+    public Role read(int id) {
+        try {
+            Role role = jdbcTemplate.queryForObject("SELECT * FROM role WHERE user_id=?",
+                    BeanPropertyRowMapper.newInstance(Role.class), id);
+            return role;
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
+    }
 
     /**
      * convert the list of enum to the persistence object
      * @param roles
      * @return
      */
-    private Role getRolesAsObject(Set<ERole> roles){
+    public Role getRolesAsObject(Set<ERole> roles){
         Role role = new Role();
 
         if(roles != null){
@@ -169,4 +179,6 @@ public class RoleRepo implements roleIRepo{
 
         return null;
     }
+
+
 }

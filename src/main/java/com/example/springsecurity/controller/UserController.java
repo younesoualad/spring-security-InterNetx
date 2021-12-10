@@ -50,7 +50,7 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or @UserAccess.isOwner(#id)")
     public ResponseEntity<String> updateUser(@PathVariable("id") int id, @RequestBody NewUserDTO user) {
         UserViewDTO userView = userService.update(id, user);
 
